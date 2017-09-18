@@ -1,3 +1,9 @@
+# CodeBlocks files
+/bin/
+/obj/
+CFile.depend
+CFile.layout
+
 # Prerequisites
 *.d
 

@@ -116,6 +116,12 @@ void go_to_beginning(FILE *file)
     rewind(file);
 }
 
+/// Returns the position of cursor in given File.
+long get_cursor_position(FILE *file)
+{
+    return ftell(file);
+}
+
 #endif // CFILE_H_INCLUDED
 
 /***
