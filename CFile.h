@@ -116,7 +116,7 @@ int go_to_position_in_file(FILE *file, long offset, int mode)
 }
 
 /// Moves cursor to the beginning of given File Stream
-void go_to_beginning(FILE *file)
+void go_to_beginning_file(FILE *file)
 {
     rewind(file);
 }
@@ -148,7 +148,7 @@ struct dirent *read_directory(DIR *directory)
 }
 
 /// Resets the position of Directory Stream to the beginning of a Directory
-void go_to_beginning_of_directory(DIR *directory)
+void go_to_beginning_directory(DIR *directory)
 {
     rewinddir(directory);
 }
