@@ -10,6 +10,9 @@
 
 /// Standard I/O C Library
 #include <stdio.h>
+/// Library which is used to operate on Directories
+/// According to "The Single UNIX Specification":   http://pubs.opengroup.org/onlinepubs/7908799/xsh/dirent.h.html
+#include <dirent.h>
 
 /// ============================================ Definitions
 
@@ -38,69 +41,71 @@
 
 /// ============================================ Operations
 
-/// Open selected File in given mode.
+/// ====================== Files
+
+/// Opens selected File in given mode.
 /// For different Modes see FILE_MODE definitions in this file in "Definitions" section.
 FILE* open_file(const char *file_name, const char *mode)
 {
     return fopen(file_name, mode);
 }
 
-/// Close the given File.
+/// Closes the given File.
 int close_file(FILE *file)
 {
     return fclose(file);
 }
 
-/// Read single character from File.
+/// Reads single character from File.
 int read_character_from_file(FILE *file)
 {
     return fgetc(file);
 }
 
-/// Read n-1 characters from input stream from File.
+/// Reads n-1 characters from input stream from File.
 char* read_input_stream(char *buffer, int number_of_characters, FILE *file)
 {
     return fgets(buffer, number_of_characters, file);
 }
 
-/// Write selected character to given File.
+/// Writes selected character to given File.
 int write_character_to_file(int character, FILE *file)
 {
     return fputc(character, file);
 }
 
-/// Write to File using fprintf method.
+/// Writes to File using fprintf method.
 int write_to_file_printf(FILE *file, const char *text)
 {
     return fprintf(file, text);
 }
 
-/// Write given text to File.
+/// Writes given text to File.
 int write_to_file_puts(const char *text, FILE *file)
 {
     return fputs(text, file);
 }
 
-/// Read binary File.
+/// Reads binary File.
 size_t read_binary_file(void *ptr, size_t size_of_elements, size_t number_of_elements, FILE *file)
 {
     return fread(ptr, size_of_elements, number_of_elements, file);
 }
 
-/// Wirte to binary File.
+/// Writes to binary File.
 size_t write_binary_file(const void *ptr, size_t size_of_elements, size_t number_of_elements, FILE *file)
 {
     return fwrite(ptr, size_of_elements, number_of_elements, file);
 }
 
-/// Save current stream to File.
+/// Saves current stream to File.
 /// File will still be open.
 int save_file(FILE *file)
 {
     return fflush(file);
 }
 
-/// Set the cursor position in file which depends on "mode".
+/// Sets the cursor position in file which depends on "mode".
 /// Mode == 0 => Move cursor from the File beginning,
 /// Mode == 1 => Move cursor from the current position,
 /// Mode == 2 => Move cursor from the File end.
@@ -110,16 +115,54 @@ int go_to_position_in_file(FILE *file, long offset, int mode)
     return fseek(file, offset, mode);
 }
 
-/// Moves cursor to the beginning of given File
+/// Moves cursor to the beginning of given File Stream
 void go_to_beginning(FILE *file)
 {
     rewind(file);
 }
 
 /// Returns the position of cursor in given File.
-long get_cursor_position(FILE *file)
+long get_cursor_position_in_file(FILE *file)
 {
     return ftell(file);
+}
+
+/// ====================== Directories
+
+/// Opens given Directory.
+DIR* open_directory(const char *directory_name)
+{
+    return opendir(directory_name);
+}
+
+/// Closes given Directory.
+int close_directory(DIR *directory)
+{
+    return closedir(directory);
+}
+
+/// Reads selected Directory.
+struct dirent *read_directory(DIR *directory)
+{
+    return readdir(directory);
+}
+
+/// Resets the position of Directory Stream to the beginning of a Directory
+void go_to_beginning_of_directory(DIR *directory)
+{
+    rewinddir(directory);
+}
+
+/// Sets the position of Directory Stream.
+void go_to_position_in_directory(DIR *directory, long int position)
+{
+    seekdir(directory, position);
+}
+
+/// Returns the position in Stream in given Directory.
+long int get_cursor_position_in_directory(DIR *directory)
+{
+    return telldir(directory);
 }
 
 #endif // CFILE_H_INCLUDED
