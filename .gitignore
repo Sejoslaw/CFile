@@ -1,8 +1,8 @@
 # CodeBlocks files
 /bin/
 /obj/
-CFile.depend
-CFile.layout
+CWrapper.depend
+CWrapper.layout
 
 # Prerequisites
 *.d
