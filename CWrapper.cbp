@@ -32,6 +32,7 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="CFile.h" />
+		<Unit filename="CWinAPI.h" />
 		<Unit filename="test.c">
 			<Option compilerVar="CC" />
 		</Unit>
